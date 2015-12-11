@@ -43,7 +43,7 @@
             totalobytes += if2m->ifm_data.ifi_opackets;
         }
     }
-    printf("Total ibytes %qu\tobytes %qu\n", totalibytes, totalobytes);
+    printf("\nTotal iPackets %qu\toPackets %qu\n", totalibytes, totalobytes);
 }
 
 - (void)applicationDidFinishLaunching
