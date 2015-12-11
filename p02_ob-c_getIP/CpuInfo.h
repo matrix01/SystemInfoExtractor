@@ -13,6 +13,22 @@
 #include <mach/mach.h>
 #include <mach/processor_info.h>
 #include <mach/mach_host.h>
+//Uses related
+#include <sys/sysctl.h>
+#include <netinet/in.h>
+#include <net/route.h>
+//System Network info related
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <ifaddrs.h>
+#include <net/if.h>
+#include <netdb.h>
+//System memory related
+#include <mach/vm_statistics.h>
+#include <mach/mach_types.h>
+#include <mach/mach_init.h>
+#include <mach/mach_host.h>
 
 @interface CpuInfo : NSObject {
     processor_info_array_t cpuInfo, prevCpuInfo;
