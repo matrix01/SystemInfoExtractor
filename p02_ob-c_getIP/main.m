@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CpuInfo.h"
 //System Network info related
 #include <stdio.h>
 #include <sys/types.h>
@@ -25,6 +26,7 @@
 #include <mach/mach_types.h>
 #include <mach/mach_init.h>
 #include <mach/mach_host.h>
+
 
 static unsigned long long _previousTotalTicks = 0;
 static unsigned long long _previousIdleTicks = 0;
@@ -140,8 +142,10 @@ void getNetworkUses() {
         next += ifm->ifm_msglen;
         if (ifm->ifm_type == RTM_IFINFO2) {
             struct if_msghdr2 *if2m = (struct if_msghdr2 *)ifm;
-            totalibytes += if2m->ifm_data.ifi_ibytes;
-            totalobytes += if2m->ifm_data.ifi_obytes;
+//            totalibytes += if2m->ifm_data.ifi_ibytes;
+//            totalobytes += if2m->ifm_data.ifi_obytes;
+            totalibytes += if2m->ifm_data.ifi_ipackets;
+            totalobytes += if2m->ifm_data.ifi_opackets;
         }
     }
     printf("Total ibytes %qu\tobytes %qu\n", totalibytes, totalobytes);
@@ -152,6 +156,8 @@ int main(int argc, const char * argv[]) {
         getNetworkUses();
         getCPULoad();
         getRamUses();
+        CpuInfo *cpuInfo = [[CpuInfo alloc]init];
+        [cpuInfo applicationDidFinishLaunching];
     }
     return 0;
 }
